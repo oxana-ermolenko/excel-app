@@ -1,5 +1,6 @@
+// Pure functions
 export function capitalize(string) {
-  if (typeof string!== 'string') {
+  if (typeof string !== 'string') {
     return ''
   }
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -14,7 +15,7 @@ export function range(start, end) {
       .map((_, index) => start + index)
 }
 
-export function storage(key, data) {
+export function storage(key, data = null) {
   if (!data) {
     return JSON.parse(localStorage.getItem(key))
   }
@@ -32,7 +33,7 @@ export function camelToDashCase(str) {
   return str.replace(/([A-Z])/g, g => `-${g[0].toLowerCase()}`)
 }
 
-export function toInlineStyles(styles= {} ) {
+export function toInlineStyles(styles = {}) {
   return Object.keys(styles)
       .map(key => `${camelToDashCase(key)}: ${styles[key]}`)
       .join(';')
@@ -49,4 +50,12 @@ export function debounce(fn, wait) {
     clearTimeout(timeout)
     timeout = setTimeout(later, wait)
   }
+}
+
+export function clone(obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
+
+export function preventDefault(event) {
+  event.preventDefault()
 }
